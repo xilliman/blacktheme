@@ -1,0 +1,27 @@
+.site-footer {
+    margin: 0 auto;
+    padding: 1em;
+    background-color: var(--primary-color);
+    color: var(--white);
+    margin-top: 2em;
+}
+
+.site-footer__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.site-footer .menu {
+    padding: 0;
+}
+
+/* Disable list style type for all li inside the header */
+.site-footer li {
+    list-style-type: none;
+}
+
+.site-footer a {
+    color: var(--white);
+    text-decoration: none;
+}
