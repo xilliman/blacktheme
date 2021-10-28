@@ -1,180 +1,150 @@
 <?php
-/**
- * blacktheme functions and definitions
- *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
- * @package blacktheme
- */
 
-if ( ! defined( '_S_VERSION' ) ) {
-	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
-}
+    // Register Custom Post Type
 
-if ( ! function_exists( 'blacktheme_setup' ) ) :
-	/**
-	 * Sets up theme defaults and registers support for various WordPress features.
-	 *
-	 * Note that this function is hooked into the after_setup_theme hook, which
-	 * runs before the init hook. The init hook is too late for some features, such
-	 * as indicating support for post thumbnails.
-	 */
-	function blacktheme_setup() {
-		/*
-		 * Make theme available for translation.
-		 * Translations can be filed in the /languages/ directory.
-		 * If you're building a theme based on blacktheme, use a find and replace
-		 * to change 'blacktheme' to the name of your theme in all the template files.
-		 */
-		load_theme_textdomain( 'blacktheme', get_template_directory() . '/languages' );
+    function blacktheme_custom_posttype_tutorial() {
 
-		// Add default posts and comments RSS feed links to head.
-		add_theme_support( 'automatic-feed-links' );
+        $labels = array(
+            'name'                  => 'Tutorials',
+            'singular_name'         => 'Tutorial',
+            'menu_name'             => 'Tutorials',
+            'name_admin_bar'        => 'Tutorials',
+            'archives'              => '',
+            'attributes'            => '',
+            'parent_item_colon'     => '',
+            'all_items'             => 'Alle Tutorials',
+            'add_new_item'          => '',
+            'add_new'               => 'Neues Tutorial',
+            'new_item'              => '',
+            'edit_item'             => '',
+            'update_item'           => '',
+            'view_item'             => '',
+            'view_items'            => '',
+            'search_items'          => '',
+            'not_found'             => '',
+            'not_found_in_trash'    => '',
+            'featured_image'        => '',
+            'set_featured_image'    => '',
+            'remove_featured_image' => '',
+            'use_featured_image'    => '',
+            'insert_into_item'      => '',
+            'uploaded_to_this_item' => '',
+            'items_list'            => '',
+            'items_list_navigation' => '',
+            'filter_items_list'     => '',
+        );
+        $args = array(
+            'label'                 => 'Tutorial',
+            'description'           => 'Einzelne Tutorials',
+            'labels'                => $labels,
+            'supports'              => array( 'title', 'editor', 'thumbnail', 'comments', 'trackbacks', 'revisions', 'custom-fields', 'page-attributes', 'post-formats' ),
+            'hierarchical'          => false,
+            'public'                => true,
+            'show_ui'               => true,
+            'show_in_menu'          => true,
+            "show_in_rest"          => true,
+            'menu_position'         => 5,
+            'show_in_admin_bar'     => true,
+            'show_in_nav_menus'     => true,
+            'can_export'            => true,
+            'has_archive'           => true,
+            'exclude_from_search'   => false,
+            'publicly_queryable'    => true,
+            'capability_type'       => 'page',
+        );
+        register_post_type( 'tutorial', $args );
 
-		/*
-		 * Let WordPress manage the document title.
-		 * By adding theme support, we declare that this theme does not use a
-		 * hard-coded <title> tag in the document head, and expect WordPress to
-		 * provide it for us.
-		 */
-		add_theme_support( 'title-tag' );
+    }
+    add_action( 'init', 'blacktheme_custom_posttype_tutorial', 0 );
 
-		/*
-		 * Enable support for Post Thumbnails on posts and pages.
-		 *
-		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		 */
-		add_theme_support( 'post-thumbnails' );
+    // Custom taxonomy
 
-		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus(
-			array(
-				'menu-1' => esc_html__( 'Primary', 'blacktheme' ),
-			)
-		);
+    // Register Custom Taxonomy
+    function blacktheme_customtaxonomy_genre() {
 
-		/*
-		 * Switch default core markup for search form, comment form, and comments
-		 * to output valid HTML5.
-		 */
-		add_theme_support(
-			'html5',
-			array(
-				'search-form',
-				'comment-form',
-				'comment-list',
-				'gallery',
-				'caption',
-				'style',
-				'script',
-			)
-		);
+        $labels = array(
+            'name'                       => 'genre',
+            'singular_name'              => 'Genre',
+            'menu_name'                  => 'Genre'
+        );
+        $args = array(
+            'labels'                     => $labels,
+            'hierarchical'               => true,
+            "show_in_rest"          => true,
+            'public'                     => true,
+            'show_ui'                    => true,
+            'show_admin_column'          => true,
+            'show_in_nav_menus'          => true,
+            'show_tagcloud'              => true,
+        );
+        register_taxonomy( 'genre', array( 'tutorial' ), $args );
 
-		// Set up the WordPress core custom background feature.
-		add_theme_support(
-			'custom-background',
-			apply_filters(
-				'blacktheme_custom_background_args',
-				array(
-					'default-color' => 'ffffff',
-					'default-image' => '',
-				)
-			)
-		);
+    }
+    add_action( 'init', 'blacktheme_customtaxonomy_genre', 0 );
 
-		// Add theme support for selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
+    add_action( 'after_setup_theme', 'blacktheme_register_nav' );
 
-		/**
-		 * Add support for core custom logo.
-		 *
-		 * @link https://codex.wordpress.org/Theme_Logo
-		 */
-		add_theme_support(
-			'custom-logo',
-			array(
-				'height'      => 250,
-				'width'       => 250,
-				'flex-width'  => true,
-				'flex-height' => true,
-			)
-		);
-	}
-endif;
-add_action( 'after_setup_theme', 'blacktheme_setup' );
+    function blacktheme_register_nav() {
+        register_nav_menu( "main_nav", "Header-Navgation" );
+        register_nav_menu( "footer_nav", "Footer-Navgation" );
+    }
 
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function blacktheme_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'blacktheme_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'blacktheme_content_width', 0 );
+    // Beitragsformate
+    add_theme_support( "post-formats", array("video", "gallery") );
 
-/**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-function blacktheme_widgets_init() {
-	register_sidebar(
-		array(
-			'name'          => esc_html__( 'Sidebar', 'blacktheme' ),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'blacktheme' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-}
-add_action( 'widgets_init', 'blacktheme_widgets_init' );
+    // Widgets
 
-/**
- * Enqueue scripts and styles.
- */
-function blacktheme_scripts() {
-	wp_enqueue_style( 'blacktheme-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'blacktheme-style', 'rtl', 'replace' );
+    add_action( "widgets_init", "blacktheme_register_sidebar" );
 
-	wp_enqueue_script( 'blacktheme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+    function blacktheme_register_sidebar() {
+        register_sidebar( array(
+            "name" => "Meine Sidebar",
+            "id" => "sidebar-1",
+            "description" => "Unter dem Inhalt",
+            "before_widget" => "<div id='%1$s' class='widget %2$s'>",
+            "after_widget" => "</div>",
+            "before_title" => "<h4 class='widgettitle'",
+            "after_title" => "</h4>"
+        ) );
+    } 
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-}
-add_action( 'wp_enqueue_scripts', 'blacktheme_scripts' );
+    // Theme Support
 
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
+    add_theme_support( "post-thumbnails" );
 
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
+    // Kommentare
 
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-require get_template_directory() . '/inc/template-functions.php';
+    function blacktheme_comments( $comment, $args, $depth ) { $GLOBALS['comment'] = $comment; ?>
+            <li class="single-comment">
+             <?php echo get_avatar( $comment, $size='90' ); ?>
+             <p><?php echo get_comment_author_link(); ?></p>
+             <p><?php echo get_comment_date("d.m.Y"); ?>, <?php echo get_comment_time(); ?> Uhr</p>
+        <?php comment_text(); ?>
+        <div class="reply">
+            <?php comment_reply_link( array_merge($args, array("depth" => $depth, "max-depth" => $args["max_depth"]))); ?>
+        </div>
+    <?php }
 
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
+    // Styles & Scripts
 
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
+    // Add JS
 
+    // Basic JS
+    wp_register_script( "script", get_template_directory_uri() . "/js/script.js", "", 2, true );
+    wp_enqueue_script("script");
+
+    // Components
+    wp_register_script('header', get_template_directory_uri() . '/js/components/header.js', '', 2, true);
+    wp_enqueue_script('header');
+
+    // Add HTML5 Theme support
+    $args = array(
+        "search-form",
+        "comment-form",
+        "comment-list",
+        "gallery",
+        "caption"
+    );
+
+    add_theme_support( "html5", $args );
+?>

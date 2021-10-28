@@ -1,6 +1,10 @@
+<?php 
+    /* Template Name: Foobar */
+?>
+
 <!-- Header -->
 <?php get_header();?>
-<mark>page.php</mark>
+<mark>template-foobar.php</mark>
 <div class="container">
     <main class="site-main">
         <article class="site-content">
@@ -15,7 +19,7 @@
             <?php endif; ?>
         </article>
         <!-- Sidebar -->
-        <?php get_sidebar(); ?>
+        <!-- <?php get_sidebar(); ?> -->
     </main>
 </div>
 
