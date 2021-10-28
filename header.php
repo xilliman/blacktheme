@@ -1,59 +1,69 @@
-<?php
-/**
- * The header for our theme
- *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package blacktheme
- */
-
-?>
-<!doctype html>
-<html <?php language_attributes(); ?>>
+<!DOCTYPE html>
+<html lang="<?php bloginfo('language');?>">
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
+    <meta charset="<?php bloginfo('charset');?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php wp_title('');?><?php bloginfo('name');?></title>
 
-	<?php wp_head(); ?>
+    <link rel="stylesheet" href="<?php bloginfo('template_url')?>/css/base/normalize.css">
+    <link rel="stylesheet" href="<?php bloginfo('template_url')?>/css/base/skeleton.css">
+    <link rel="stylesheet" href="<?php bloginfo('stylesheet_url')?>">
+    <link rel="stylesheet" href="<?php bloginfo('template_url')?>/css/css.css">
+
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <?php wp_enqueue_script( "jquery" ); ?>
+    <?php wp_enqueue_script( "comment-reply" ); ?>
+
+    <?php wp_head();?>
 </head>
+<body <?php body_class()?>>
 
-<body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'blacktheme' ); ?></a>
+<header class="site-header">
+    <div class="site-header__top container">
+        <div class="site-header__wrapper">
+            <div class="site-header__middle">
+                <a href="<?php echo home_url();?>" class="logo"><?php bloginfo('name');?></a>
+            </div>
+            <nav class="nav-wrapper meta">
+                <?php 
+                    $args = array(
+                        "theme_location" => "footer_nav",
+                        "depth" => 1
+                    );
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$blacktheme_description = get_bloginfo( 'description', 'display' );
-			if ( $blacktheme_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $blacktheme_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+                    wp_nav_menu( $args )
+                ?>
+            </nav>
+        </div>
+    </div>
+    <div class="site-header__bottom container">
+        <div class="site-header__wrapper">
+            <div class="site-header__navi main">
+                <nav class="nav-wrapper">
+                    <button class="nav__toggle" aria-expanded="false" type="button">
+                        menu
+                    </button>
+                    <?php 
+                    $args = array(
+                        "theme_location" => "main_nav",
+                        "depth" => 1
+                    );
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'blacktheme' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+                    wp_nav_menu( $args )
+                ?>
+                </nav>
+            </div>
+            <div class="site-header__search">
+                <div class="site-header__search-wrapper">
+                    <button class="search__toggle" aria-label="Open search">
+                        Search
+                    </button>
+                    <?php get_search_form(); ?>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</header>

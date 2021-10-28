@@ -1,77 +1,37 @@
-<?php
-/**
- * The template for displaying comments
- *
- * This is the template that displays the area of the page that contains both the current comments
- * and the comment form.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package blacktheme
- */
-
-/*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password we will
- * return early without loading the comments.
- */
-if ( post_password_required() ) {
-	return;
-}
-?>
-
-<div id="comments" class="comments-area">
-
-	<?php
-	// You can start editing here -- including this comment!
-	if ( have_comments() ) :
-		?>
-		<h2 class="comments-title">
-			<?php
-			$blacktheme_comment_count = get_comments_number();
-			if ( '1' === $blacktheme_comment_count ) {
-				printf(
-					/* translators: 1: title. */
-					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'blacktheme' ),
-					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
-				);
-			} else {
-				printf( 
-					/* translators: 1: comment count number, 2: title. */
-					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $blacktheme_comment_count, 'comments title', 'blacktheme' ) ),
-					number_format_i18n( $blacktheme_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
-				);
-			}
-			?>
-		</h2><!-- .comments-title -->
-
-		<?php the_comments_navigation(); ?>
-
-		<ol class="comment-list">
-			<?php
-			wp_list_comments(
-				array(
-					'style'      => 'ol',
-					'short_ping' => true,
-				)
-			);
-			?>
-		</ol><!-- .comment-list -->
-
-		<?php
-		the_comments_navigation();
-
-		// If comments are closed and there are comments, let's leave a little note, shall we?
-		if ( ! comments_open() ) :
-			?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'blacktheme' ); ?></p>
-			<?php
-		endif;
-
-	endif; // Check for have_comments().
-
-	comment_form();
+<div class="comment-form">
+	<?php $fields = array(
+		'author' => '<p><label for="author">' . __( 'Dein Name <em>(erforderlich)</em>' ) . '</label><br /><input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' /></p>',
+		'email' => '<p><label for="email">' . __( 'Deine E-Mail-Adresse <em>(erforderlich, wird aber nicht veröffentlicht)</em>' ) . '</label><br /><input id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' /></p>',
+		'url' => '<p><label for="url">' . __( 'Deine Website' ) . '</label><br /><input id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /></p>',
+	);
+	
+	comment_form( array (
+		'fields' => apply_filters( 'comment_form_default_fields', $fields ), 
+		'comment_notes_before' => '<p>Bitte verfasse einen Kommentar.</p>', 
+		'comment_notes_after' => '<p>Dein Kommentar wird vor der Freischaltung von einem Admin moderiert. </p>', 
+		'title_reply' => __( '<h3>Beitrag kommentieren</h3>' )
+	));
 	?>
+</div>
 
-</div><!-- #comments -->
+
+<div class="comment-list">
+	<?php if ( have_comments() ) : ?>
+	
+	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
+	<div class="navigation">
+	<div class="nav-previous"> <?php previous_comments_link( 'Ä̈ltere Kommentare' ); ?> </div>
+	<div class="nav-next"> <?php next_comments_link( 'Neuere Kommentare' ); ?> </div>
+	</div>
+	<?php endif; ?>
+	
+	<ul>
+	<?php wp_list_comments('type=all&callback=blacktheme_comments'); ?>
+	</ul>
+	
+	<?php if ( ! comments_open() ) : ?>
+	<p>Die Kommentare für diesen Beitrag sind geschlossen.</p>
+	<?php endif; ?>
+	
+	<?php endif; ?>
+</div>
