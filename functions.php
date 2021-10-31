@@ -1,93 +1,11 @@
 <?php
-
-    // Register Custom Post Type
-
-    function blacktheme_custom_posttype_tutorial() {
-
-        $labels = array(
-            'name'                  => 'Tutorials',
-            'singular_name'         => 'Tutorial',
-            'menu_name'             => 'Tutorials',
-            'name_admin_bar'        => 'Tutorials',
-            'archives'              => '',
-            'attributes'            => '',
-            'parent_item_colon'     => '',
-            'all_items'             => 'Alle Tutorials',
-            'add_new_item'          => '',
-            'add_new'               => 'Neues Tutorial',
-            'new_item'              => '',
-            'edit_item'             => '',
-            'update_item'           => '',
-            'view_item'             => '',
-            'view_items'            => '',
-            'search_items'          => '',
-            'not_found'             => '',
-            'not_found_in_trash'    => '',
-            'featured_image'        => '',
-            'set_featured_image'    => '',
-            'remove_featured_image' => '',
-            'use_featured_image'    => '',
-            'insert_into_item'      => '',
-            'uploaded_to_this_item' => '',
-            'items_list'            => '',
-            'items_list_navigation' => '',
-            'filter_items_list'     => '',
-        );
-        $args = array(
-            'label'                 => 'Tutorial',
-            'description'           => 'Einzelne Tutorials',
-            'labels'                => $labels,
-            'supports'              => array( 'title', 'editor', 'thumbnail', 'comments', 'trackbacks', 'revisions', 'custom-fields', 'page-attributes', 'post-formats' ),
-            'hierarchical'          => false,
-            'public'                => true,
-            'show_ui'               => true,
-            'show_in_menu'          => true,
-            "show_in_rest"          => true,
-            'menu_position'         => 5,
-            'show_in_admin_bar'     => true,
-            'show_in_nav_menus'     => true,
-            'can_export'            => true,
-            'has_archive'           => true,
-            'exclude_from_search'   => false,
-            'publicly_queryable'    => true,
-            'capability_type'       => 'page',
-        );
-        register_post_type( 'tutorial', $args );
-
-    }
-    add_action( 'init', 'blacktheme_custom_posttype_tutorial', 0 );
-
-    // Custom taxonomy
-
-    // Register Custom Taxonomy
-    function blacktheme_customtaxonomy_genre() {
-
-        $labels = array(
-            'name'                       => 'genre',
-            'singular_name'              => 'Genre',
-            'menu_name'                  => 'Genre'
-        );
-        $args = array(
-            'labels'                     => $labels,
-            'hierarchical'               => true,
-            "show_in_rest"          => true,
-            'public'                     => true,
-            'show_ui'                    => true,
-            'show_admin_column'          => true,
-            'show_in_nav_menus'          => true,
-            'show_tagcloud'              => true,
-        );
-        register_taxonomy( 'genre', array( 'tutorial' ), $args );
-
-    }
-    add_action( 'init', 'blacktheme_customtaxonomy_genre', 0 );
-
     add_action( 'after_setup_theme', 'blacktheme_register_nav' );
 
     function blacktheme_register_nav() {
-        register_nav_menu( "main_nav", "Header-Navgation" );
-        register_nav_menu( "footer_nav", "Footer-Navgation" );
-    }
+        register_nav_menu( "main_nav", "Header Navgation" );
+        register_nav_menu( "footer_nav", "Footer Navgation" );
+		register_nav_menu( "meta_nav", "Meta Navigation" );
+	}
 
     // Beitragsformate
     add_theme_support( "post-formats", array("video", "gallery") );

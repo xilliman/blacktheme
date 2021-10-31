@@ -14,28 +14,6 @@
             
             <?php endif; ?>
 
-            <h2>Letzte Tutorials</h2>
-
-            <?php 
-            
-                $args = array(
-                    "post_type" => "tutorial",
-                    "posts_per_page" => 3
-                );
-
-                $loop3 = new WP_Query($args);
-
-                if ( $loop3->have_posts() ) : while ( $loop3->have_posts() ) : $loop3->the_post(); ?>
-
-                    <?php get_template_part( 'template_parts/content-tutorial'); ?>
-
-            <?php endwhile; else : ?>
-            
-                <?php get_template_part( 'template_parts/content', 'error'); ?>
-            
-            <?php endif; wp_reset_postdata();?>
-
-            
             <h2>Letzte Beiträge</h2>
 
             <?php 
