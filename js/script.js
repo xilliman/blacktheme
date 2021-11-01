@@ -1,2 +1,3 @@
 
-console.log("Script.js")
+console.log("Script.js");
+
