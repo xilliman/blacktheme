@@ -1,5 +1,5 @@
 <?php 
-    /* Template Name: Foobar */
+    /* Template Name: Ohne Sidebar */
 ?>
 
 <!-- Header -->
@@ -18,8 +18,6 @@
             
             <?php endif; ?>
         </article>
-        <!-- Sidebar -->
-        <!-- <?php get_sidebar(); ?> -->
     </main>
 </div>
 

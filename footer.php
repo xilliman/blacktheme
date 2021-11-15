@@ -5,7 +5,7 @@
             <?php 
                 $args = array(
                     "theme_location" => "footer_nav",
-                    "depth" => 1
+                    "depth" => 2
                 );
 
                 wp_nav_menu( $args )

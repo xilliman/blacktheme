@@ -1,4 +1,6 @@
 <?php
+
+    // Menüs
     add_action( 'after_setup_theme', 'blacktheme_register_nav' );
 
     function blacktheme_register_nav() {
@@ -65,4 +67,23 @@
     );
 
     add_theme_support( "html5", $args );
+
+    // Customizer
+
+    // function theme_customize_register( $wp_customize ) {
+    //     // All our settings will go here
+
+    //         // Text color
+    //     $wp_customize->add_setting( 'text_color', array(
+    //         'default'   => '',
+    //         'transport' => 'refresh',
+    //     ) );
+    
+    //     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'text_color', array(
+    //         'section' => 'colors',
+    //         'label'   => esc_html__( 'Text color', 'theme' ),
+    //     ) ) );
+    // }
+
+    // add_action( "customize_register", "theme_customize_register" );
 ?>

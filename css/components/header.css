@@ -1,66 +1,129 @@
-.site-header {
-    margin: 0 auto;
-    padding: 1em;
+
+header {
     background-color: var(--primary-color);
     color: var(--white);
     margin-bottom: 2em;
 }
+.header__container {
+    margin: 0 auto;
+    /* padding: 1em; */
+    padding: 1em 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 
-.site-header .logo {
+.header__container .header__brand {
+    font-size: 3em;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.header__container .header__brand:hover {
+    color: var(--white);
+}
+
+/* .header__container .header__brand-container .header__brand {
     font-size: 2em;
     font-weight: bold;
-}
-
-.site-header__wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
+} */
 
 /* Disable list style type for all li inside the header */
-.site-header li {
+.header__container li {
     list-style-type: none;
 }
 
-.site-header a {
+.header__container a {
     color: var(--white);
     text-decoration: none;
 }
 
-.site-header a:hover {
-    color: black;
+.header__container a:hover {
+    color: var(--accent-color);
 }
 
-.site-header .logo:hover {
-    color: var(--white);
-}
-
-.nav-wrapper ul {
+.header__nav--main-wrapper ul, .header__nav--meta-wrapper ul {
     display: flex;
     flex-direction: row;
     gap: 1.5em;
     padding: 0;
 }
 
-.nav-wrapper.meta ul {
+.header__nav--meta-wrapper, .header__nav--search {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header__nav--meta-wrapper ul {
     gap: 1em;
 }
 
-.nav-wrapper.meta li {
+.header__nav--meta-wrapper li {
     border-right: 1px solid var(--white);
     padding-right: 1em;
 }
-.nav-wrapper.meta li:last-child {
+.header__nav--meta-wrapper li:last-child {
     padding-right: 0;
     border-right: none;
 }
 
-.site-header button {
+/* .site-header button {
     display: none;
-}
+} */
 
-.site-header__navi.meta ul {
+.header__nav--meta-wrapper ul {
     display: flex;
     flex-direction: row;
     gap: 8px;
+}
+
+/* Search */
+.site-search {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.site-search input[type="search"], .site-search input[type="submit"] {
+    border-radius: 0;
+    border: none;
+}
+
+.site-search input[type="search"]{
+    
+}
+
+.site-search input[type="search"]:focus {
+    border: 1px solid var(--accent-color);
+}
+
+.site-search input[type="submit"], .site-search input[type="submit"]:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
+    border: none;
+}
+
+
+/* Hide Search Bar and Navigations in mobile */
+@media screen and (max-width: 720px) {
+
+    .header__nav--search, .header__nav--meta-wrapper, .header__nav--main {
+        display: none;
+    }
+    /* .site-header__bottom {
+        display: none;
+    }
+
+    .nav-wrapper.meta {
+        display: none;
+    }
+
+    .nav__menu-button {
+        display: flex;
+    }
+
+    .site-header__top {
+        width: 100%;
+    } */
 }

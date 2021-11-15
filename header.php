@@ -20,32 +20,24 @@
 </head>
 <body <?php body_class()?>>
 
-<header class="site-header">
-    <div class="site-header__top container">
-        <div class="site-header__wrapper">
-            <div class="site-header__middle">
-                <a href="<?php echo home_url();?>" class="logo"><?php bloginfo('name');?></a>
-            </div>
-            <nav class="nav-wrapper meta">
-                <?php 
-                    $args = array(
-                        "theme_location" => "footer_nav",
-                        "depth" => 1
-                    );
-
-                    wp_nav_menu( $args )
-                ?>
-            </nav>
+<header>
+    <div class="header__container container">
+        <div class="header__brand-container">
+            <a href="<?php echo home_url();?>" class="header__brand"><?php bloginfo('name');?></a>
         </div>
-    </div>
-    <div class="site-header__bottom container">
-        <div class="site-header__wrapper">
-            <div class="site-header__navi main">
-                <nav class="nav-wrapper">
-                    <button class="nav__toggle" aria-expanded="false" type="button">
-                        menu
-                    </button>
-                    <?php 
+        <nav class="header__nav--meta-wrapper">
+            <?php 
+                $args = array(
+                    "theme_location" => "meta_nav",
+                    "depth" => 1
+                );
+
+                wp_nav_menu( $args )
+            ?>
+        </nav>
+        <div class="header__nav--main">
+            <nav class="header__nav--main-wrapper">
+                <?php 
                     $args = array(
                         "theme_location" => "main_nav",
                         "depth" => 1
@@ -53,17 +45,16 @@
 
                     wp_nav_menu( $args )
                 ?>
-                </nav>
+            </nav>
+        </div>
+        <div class="header__nav--search">
+            <div class="header__nav--search-wrapper">
+                <!-- <button class="search__toggle" aria-label="Open search">
+                    Search
+                </button> -->
+                <?php get_search_form(); ?>
             </div>
-            <div class="site-header__search">
-                <div class="site-header__search-wrapper">
-                    <button class="search__toggle" aria-label="Open search">
-                        Search
-                    </button>
-                    <?php get_search_form(); ?>
-                </div>
-            </div>
-            
         </div>
     </div>
+    
 </header>

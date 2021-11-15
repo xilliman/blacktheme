@@ -14,7 +14,7 @@
             
             <?php endif; ?>
 
-            <h2>Letzte Beiträge</h2>
+            <!-- <h2>Letzte Beiträge</h2>
 
             <?php 
             
@@ -35,8 +35,10 @@
             
             <?php endif; wp_reset_postdata();?>
 
-            <?php previous_posts_link();?>
-            <?php next_posts_link();?>
+            <div class="article_post-switch-container">
+                <?php previous_posts_link();?>
+                <?php next_posts_link();?>
+            </div> -->
 
         </article>
         <!-- Sidebar -->
