@@ -1,3 +1,5 @@
+<div class="debug__mark">
+
 <mark>content-search.php</mark>
 
 <section <?php post_class();?>>
@@ -7,3 +9,5 @@
     <p><?php the_time("d.m.Y");?></p>
     <p><?php the_excerpt();?></p>
 </section>
+
+</div>

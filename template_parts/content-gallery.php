@@ -1,3 +1,5 @@
+<div class="debug__mark">
+
 <mark>content-gallery.php</mark>
 
 <section <?php post_class();?>>
@@ -18,3 +20,5 @@
     </div>
     <?php the_content("Weiterlesen");?>
 </section>
+
+</div>

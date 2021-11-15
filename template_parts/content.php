@@ -1,4 +1,5 @@
-<mark>content.php</mark>
+<div class="debug__mark">
+    <mark>content.php</mark>
 
 <section <?php post_class();?>>
 
@@ -20,3 +21,4 @@
     </div>
     <?php the_excerpt();?>
 </section>
+</div>
