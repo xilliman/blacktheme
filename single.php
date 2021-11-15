@@ -15,8 +15,11 @@
             
             <?php endif; ?>
 
-            <?php previous_post_link();?>
-            <?php next_post_link();?>
+            <h3>Weitere Artikel</h3>
+            <div class="article_post-switch-container">
+                <?php previous_post_link();?>
+                <?php next_post_link();?>
+            </div>
 
         </article>
         <!-- Sidebar -->
