@@ -1,7 +1,7 @@
-<footer class="site-footer">
+<footer class="footer">
     <div class="container">
         <mark>footer.php</mark>
-        <nav class="nav-social">
+        <nav class="nav-footer">
             <?php 
                 $args = array(
                     "theme_location" => "footer_nav",
@@ -11,6 +11,9 @@
                 wp_nav_menu( $args )
             ?>
         </nav>
+        <div class="footer-copyright">
+            Copyright 2021 | Maximilian Kuhlmay
+        </div>
     </div>
 </footer>
 

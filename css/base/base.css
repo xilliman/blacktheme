@@ -2,24 +2,25 @@
 
 :root {
 
-    --color-red: #ff3366;
-    --color-orange: #ff6633;
-    --color-yellow: #FFCC33;
-    --color-green: #33FF66;
-    --color-cyan: #33FFCC;
-    --color-sky: #33CCFF;
-    --color-blue: #3366FF;
-    --color-indigo: #6633FF;
-    --color-violet: #CC33FF;
+    --color-red: #ff6663;
+    --color-orange: #feb144;
+    --color-yellow: #fdfd97;
+    --color-green: #9ee09e;
+    /* --color-cyan: #33FFCC; */
+    /* --color-sky: #9ec1cf; */
+    --color-blue: #9ec1cf;
+    /* --color-indigo: #6633FF; */
+    /* --color-violet: #cc99c9; */
     --color-grey: #efefef;
     --color-darkgrey: #444444;
 
-    --primary-color: var(--color-sky);
-    --accent-color: var(--color-orange);
+    --primary-color: var(--color-blue);
+    --accent-color: var(--color-red);
     --secondary-color: #8dd7c0ce;
     --link-color: var(--color-orange);
 
-    --text-color: var(---color-darkgrey);
+    --text-color: var(--color-darkgrey);
+    
     --white: #ffffff;
 }
 
@@ -36,6 +37,7 @@ mark {
 
 body {
     color: var(--text-color);
+    /* min-height: 100vh; */
 }
 
 /* =WordPress Core
@@ -50,20 +52,20 @@ div.aligncenter {
     margin: 5px auto 5px auto;
 }
 
-.alignright {
+/* .alignright {
     float: right;
     margin: 5px 0 20px 20px;
-}
+} */
 
 .alignleft {
     float: left;
     margin: 5px 20px 20px 0;
 }
 
-a img.alignright {
+/* a img.alignright {
     float: right;
     margin: 5px 0 20px 20px;
-}
+} */
 
 a img.alignnone {
     margin: 5px 20px 20px 0;
@@ -97,9 +99,9 @@ a img.aligncenter {
     margin: 5px 20px 20px 0;
 }
 
-.wp-caption.alignright {
+/* .wp-caption.alignright {
     margin: 5px 0 20px 20px;
-}
+} */
 
 .wp-caption img {
     border: 0 none;
